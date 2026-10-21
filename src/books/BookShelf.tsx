@@ -2,25 +2,25 @@ import BookCard from './BookCard'
 import type { Book } from './types'
 
 type BookShelfProps = {
-  title: string
   books: Book[]
 }
 
-function BookShelf({ title, books }: BookShelfProps) {
+function BookShelf({ books }: BookShelfProps) {
+  if (books.length === 0) {
+    return <p className="empty">Nothing here yet.</p>
+  }
+
   return (
-    <section>
-      <h2>{title}</h2>
-      <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap' }}>
-        {books.map((book) => (
-          <BookCard
-            key={book.id}
-            title={book.title}
-            author={book.author}
-            color={book.color}
-          />
-        ))}
-      </div>
-    </section>
+    <div className="grid">
+      {books.map((book) => (
+        <BookCard
+          key={book.id}
+          title={book.title}
+          author={book.author}
+          color={book.color}
+        />
+      ))}
+    </div>
   )
 }
 

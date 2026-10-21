@@ -1,28 +1,19 @@
 type BookCardProps = {
-    title: string
-    author: string
-    color: string
-  }
-  
-  function BookCard({ title, author, color }: BookCardProps) {
-    return (
-      <div style={{ width: '120px' }}>
-        <div
-          style={{
-            backgroundColor: color,
-            width: '120px',
-            height: '180px',
-            color: 'white',
-            padding: '8px',
-            boxSizing: 'border-box',
-          }}
-        >
-          {title}
-        </div>
-        <p>{author}</p>
+  title: string
+  author: string
+  color: string
+}
+
+function BookCard({ title, author, color }: BookCardProps) {
+  return (
+    <div>
+      <div className="cover book-card-cover" style={{ backgroundColor: color }}>
+        {title}
       </div>
-    )
-  }
-  
-  export default BookCard
-  
+      <p className="book-card-title">{title}</p>
+      <p className="book-card-author">{author}</p>
+    </div>
+  )
+}
+
+export default BookCard
