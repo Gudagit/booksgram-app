@@ -1,3 +1,4 @@
+import ReviewBody from './ReviewBody'
 import Stars from './Stars'
 import type { Book } from './types'
 
@@ -24,7 +25,7 @@ function ReadList({ books }: ReadListProps) {
             <p className="review-title">{book.title}</p>
             <p className="review-author">{book.author}</p>
             {book.rating !== undefined && <Stars rating={book.rating} />}
-            {book.comment && <p className="review-quote">{book.comment}</p>}
+            <ReviewBody book={book} />
           </div>
         </article>
       ))}

@@ -1,6 +1,9 @@
 import { useState } from 'react'
 import BookShelf from './BookShelf'
+import { fakeSeries } from './fakeBooks'
 import ReadList from './ReadList'
+import ReviewSheet from './ReviewSheet'
+import SeriesSheet from './SeriesSheet'
 import type { Book } from './types'
 
 type TabKey = 'read' | 'reading' | 'tbr'
@@ -19,7 +22,10 @@ const tabs: { key: TabKey; label: string }[] = [
 
 function BookTabs({ read, reading, tbr }: BookTabsProps) {
   const [active, setActive] = useState<TabKey>('read')
-  const lists = { read, reading, tbr }
+  const [readBooks, setReadBooks] = useState(read)
+  const [openSeries, setOpenSeries] = useState<string | null>(null)
+  const [writing, setWriting] = useState(false)
+  const lists = { read: readBooks, reading, tbr }
 
   return (
     <section className="panel">
@@ -39,9 +45,33 @@ function BookTabs({ read, reading, tbr }: BookTabsProps) {
         ))}
       </div>
       {active === 'read' ? (
-        <ReadList books={lists.read} />
+        <>
+          <button
+            type="button"
+            className="button write-btn"
+            onClick={() => setWriting(true)}
+          >
+            Write a review
+          </button>
+          <ReadList books={lists.read} />
+        </>
       ) : (
-        <BookShelf books={lists[active]} />
+        <BookShelf
+          books={lists[active]}
+          onSeries={(book) => setOpenSeries(book.seriesId ?? null)}
+        />
+      )}
+      {openSeries && fakeSeries[openSeries] && (
+        <SeriesSheet
+          series={fakeSeries[openSeries]}
+          onClose={() => setOpenSeries(null)}
+        />
+      )}
+      {writing && (
+        <ReviewSheet
+          onSave={(book) => setReadBooks([book, ...readBooks])}
+          onClose={() => setWriting(false)}
+        />
       )}
     </section>
   )

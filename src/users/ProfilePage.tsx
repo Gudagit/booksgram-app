@@ -27,7 +27,14 @@ function ProfilePage() {
         <GenreTags genres={fakeProfile.genres} />
       </div>
       <div className="content">
-        <FavoritesShelf books={fakeFavorites} />
+        <FavoritesShelf
+          books={fakeFavorites.slice(0, 4)}
+          candidates={[
+            ...fakeShelves.read,
+            ...fakeShelves.reading,
+            ...fakeShelves.tbr,
+          ]}
+        />
         <BookTabs
           read={fakeShelves.read}
           reading={fakeShelves.reading}
