@@ -1,9 +1,13 @@
+import { useState } from 'react'
 import BookTabs from '../books/BookTabs'
 import FavoritesShelf from '../books/FavoritesShelf'
 import { fakeFavorites, fakeShelves } from '../books/fakeBooks'
+import EditProfileSheet from './EditProfileSheet'
 import GenreTags from './GenreTags'
 import ProfileHeader from './ProfileHeader'
-import { fakeProfile } from './fakeProfile'
+import TastesPanel from './TastesPanel'
+import { fakeFollowers } from './fakeProfile'
+import { useProfile } from './useProfile'
 
 const stats = [
   { label: 'Read', value: fakeShelves.read.length },
@@ -11,20 +15,23 @@ const stats = [
     label: 'Reviews',
     value: fakeShelves.read.filter((book) => book.comment).length,
   },
-  { label: 'Followers', value: fakeProfile.followers },
+  { label: 'Followers', value: fakeFollowers },
 ]
 
 function ProfilePage() {
+  const [profile, saveProfile] = useProfile()
+  const [editing, setEditing] = useState(false)
+
   return (
     <main>
       <div className="side">
         <ProfileHeader
-          name={fakeProfile.name}
-          handle={fakeProfile.handle}
-          bio={fakeProfile.bio}
+          profile={profile}
           stats={stats}
+          onEdit={() => setEditing(true)}
         />
-        <GenreTags genres={fakeProfile.genres} />
+        <GenreTags genres={profile.genres} />
+        <TastesPanel profile={profile} />
       </div>
       <div className="content">
         <FavoritesShelf
@@ -41,6 +48,13 @@ function ProfilePage() {
           tbr={fakeShelves.tbr}
         />
       </div>
+      {editing && (
+        <EditProfileSheet
+          profile={profile}
+          onSave={saveProfile}
+          onClose={() => setEditing(false)}
+        />
+      )}
     </main>
   )
 }

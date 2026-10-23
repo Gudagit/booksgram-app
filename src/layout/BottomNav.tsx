@@ -1,19 +1,14 @@
 import type { ReactNode } from 'react'
+import { NavLink } from 'react-router'
 
-type NavKey = 'home' | 'search' | 'profile'
-
-type BottomNavProps = {
-  active: NavKey
-}
-
-const items: { key: NavKey; label: string; icon: ReactNode }[] = [
+const items: { to: string; label: string; icon: ReactNode }[] = [
   {
-    key: 'home',
+    to: '/',
     label: 'Home',
     icon: <path d="M3 11.5 12 4l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z" />,
   },
   {
-    key: 'search',
+    to: '/search',
     label: 'Search',
     icon: (
       <>
@@ -23,7 +18,7 @@ const items: { key: NavKey; label: string; icon: ReactNode }[] = [
     ),
   },
   {
-    key: 'profile',
+    to: '/profile',
     label: 'Profile',
     icon: (
       <>
@@ -34,21 +29,16 @@ const items: { key: NavKey; label: string; icon: ReactNode }[] = [
   },
 ]
 
-function BottomNav({ active }: BottomNavProps) {
+function BottomNav() {
   return (
     <nav className="bottom-nav" aria-label="Main">
       {items.map((item) => (
-        <button
-          key={item.key}
-          type="button"
-          className={active === item.key ? 'nav-item active' : 'nav-item'}
-          aria-current={active === item.key ? 'page' : undefined}
-        >
+        <NavLink key={item.to} to={item.to} end className="nav-item">
           <svg viewBox="0 0 24 24" aria-hidden="true">
             {item.icon}
           </svg>
           {item.label}
-        </button>
+        </NavLink>
       ))}
     </nav>
   )

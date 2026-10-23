@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import Sheet from '../layout/Sheet'
 import type { Book } from './types'
 
 type FavoritePickerProps = {
@@ -24,57 +25,38 @@ function FavoritePicker({
   )
 
   return (
-    <div className="sheet-backdrop" onClick={onClose}>
-      <section
-        className="panel sheet"
-        role="dialog"
-        aria-label={title}
-        onClick={(event) => event.stopPropagation()}
-      >
-        <div className="panel-head">
-          <h2>{title}</h2>
-          <button
-            type="button"
-            className="sheet-close"
-            aria-label="Close"
-            onClick={onClose}
-          >
-            ✕
-          </button>
-        </div>
+    <Sheet title={title} onClose={onClose}>
+      <div className="field">
+        <label htmlFor="favorite-search">Search your books</label>
+        <input
+          id="favorite-search"
+          value={query}
+          autoComplete="off"
+          onChange={(event) => setQuery(event.target.value)}
+        />
+      </div>
 
-        <div className="field">
-          <label htmlFor="favorite-search">Search your books</label>
-          <input
-            id="favorite-search"
-            value={query}
-            autoComplete="off"
-            onChange={(event) => setQuery(event.target.value)}
-          />
-        </div>
-
-        {matches.length === 0 ? (
-          <p className="empty">No books found on your shelves.</p>
-        ) : (
-          <ul className="pick-list">
-            {matches.map((book) => (
-              <li key={book.id}>
-                <button
-                  type="button"
-                  onClick={() => {
-                    onPick(book)
-                    onClose()
-                  }}
-                >
-                  {book.title}
-                  <span className="suggest-sub">{book.author}</span>
-                </button>
-              </li>
-            ))}
-          </ul>
-        )}
-      </section>
-    </div>
+      {matches.length === 0 ? (
+        <p className="empty">No books found on your shelves.</p>
+      ) : (
+        <ul className="pick-list">
+          {matches.map((book) => (
+            <li key={book.id}>
+              <button
+                type="button"
+                onClick={() => {
+                  onPick(book)
+                  onClose()
+                }}
+              >
+                {book.title}
+                <span className="suggest-sub">{book.author}</span>
+              </button>
+            </li>
+          ))}
+        </ul>
+      )}
+    </Sheet>
   )
 }
 

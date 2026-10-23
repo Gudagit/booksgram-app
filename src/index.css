@@ -507,6 +507,601 @@ button:focus-visible {
   margin-bottom: 18px;
 }
 
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.tabs-two {
+  grid-template-columns: repeat(2, 1fr);
+  margin-bottom: 0;
+}
+
+.reel-book {
+  --paper: #f0dfb2;
+  --ink: #3f2d18;
+  display: grid;
+  gap: 14px;
+}
+
+.reel-book .panel-head {
+  margin-bottom: 0;
+}
+
+.book {
+  position: relative;
+  padding: 14px 14px 18px;
+  border-radius: 6px 14px 14px 6px;
+  background-color: #4a2a1a;
+  background-image:
+    linear-gradient(135deg, rgba(255, 220, 170, 0.08), rgba(0, 0, 0, 0.4)),
+    url('/textures/leather.jpg');
+  background-size:
+    auto,
+    380px;
+  box-shadow:
+    0 22px 28px -16px rgba(40, 22, 8, 0.7),
+    inset 0 0 0 1px rgba(255, 215, 160, 0.14),
+    inset 0 2px 3px rgba(255, 225, 180, 0.22),
+    inset 0 -3px 6px rgba(0, 0, 0, 0.35);
+}
+
+.book::before {
+  content: '';
+  position: absolute;
+  inset: 5px;
+  border: 1px solid rgba(232, 190, 110, 0.5);
+  border-radius: 4px 11px 11px 4px;
+  pointer-events: none;
+}
+
+.book::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: -12px;
+  width: 11px;
+  height: 46px;
+  transform: translateX(14px);
+  background: linear-gradient(90deg, #8e1f2a, #b3303b 55%, #7d1822);
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 82%, 0 100%);
+  filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.4));
+  pointer-events: none;
+}
+
+.book-pages {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  perspective: 1500px;
+  border-radius: 3px 6px 6px 3px;
+  box-shadow:
+    -2px 2px 0 #e7d9b3,
+    -4px 4px 0 #cfba8d,
+    2px 2px 0 #e7d9b3,
+    4px 4px 0 #cfba8d,
+    0 9px 12px -3px rgba(30, 18, 6, 0.55);
+}
+
+.book-pages::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 4px;
+  transform: translateX(-50%);
+  background: linear-gradient(
+    90deg,
+    rgba(40, 24, 8, 0.5),
+    rgba(40, 24, 8, 0.15) 45%,
+    rgba(255, 245, 220, 0.25) 60%,
+    rgba(40, 24, 8, 0.35)
+  );
+  z-index: 1;
+  pointer-events: none;
+}
+
+.page {
+  position: relative;
+  isolation: isolate;
+  box-sizing: border-box;
+  display: grid;
+  align-content: start;
+  color: var(--ink);
+  font-family: var(--cover-font);
+  background-color: #e6cf9c;
+}
+
+.page::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: url('/textures/paper.jpg') center / cover;
+}
+
+.page-left::before {
+  transform: scaleX(-1);
+}
+
+.page::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(130% 100% at 50% 45%, transparent 55%, rgba(90, 55, 15, 0.26));
+}
+
+.page-left::after {
+  background:
+    linear-gradient(
+      90deg,
+      transparent 55%,
+      rgba(90, 55, 15, 0.14) 76%,
+      rgba(40, 22, 6, 0.3) 100%
+    ),
+    radial-gradient(130% 100% at 55% 45%, transparent 55%, rgba(90, 55, 15, 0.26));
+}
+
+.page-right::after {
+  background:
+    linear-gradient(
+      270deg,
+      transparent 55%,
+      rgba(90, 55, 15, 0.14) 76%,
+      rgba(40, 22, 6, 0.3) 100%
+    ),
+    radial-gradient(130% 100% at 45% 45%, transparent 55%, rgba(90, 55, 15, 0.26));
+}
+
+.page-left {
+  padding: 16px 0 38px 14px;
+  border-radius: 3px 0 0 3px;
+}
+
+.page-right {
+  padding: 16px 14px 38px 0;
+  border-radius: 0 6px 6px 0;
+}
+
+.page-art {
+  position: relative;
+  aspect-ratio: 1 / 1.7;
+  overflow: hidden;
+  opacity: 0.96;
+  filter: sepia(0.08);
+  -webkit-mask-composite: source-in;
+  mask-composite: intersect;
+}
+
+.page-left .page-art {
+  -webkit-mask-image:
+    linear-gradient(90deg, transparent, #000 15%),
+    linear-gradient(180deg, transparent, #000 11%, #000 89%, transparent);
+  mask-image:
+    linear-gradient(90deg, transparent, #000 15%),
+    linear-gradient(180deg, transparent, #000 11%, #000 89%, transparent);
+}
+
+.page-right .page-art {
+  -webkit-mask-image:
+    linear-gradient(270deg, transparent, #000 15%),
+    linear-gradient(180deg, transparent, #000 11%, #000 89%, transparent);
+  mask-image:
+    linear-gradient(270deg, transparent, #000 15%),
+    linear-gradient(180deg, transparent, #000 11%, #000 89%, transparent);
+}
+
+.art-half {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 200%;
+}
+
+.art-left {
+  left: 0;
+}
+
+.art-right {
+  left: -100%;
+}
+
+.art {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.page-art::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background-image: url('/textures/paper.jpg');
+  background-size: 420px;
+  mix-blend-mode: multiply;
+  opacity: 0.28;
+}
+
+.page-art::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.page-left .page-art::after {
+  background: linear-gradient(90deg, transparent 52%, rgba(35, 18, 4, 0.26));
+}
+
+.page-right .page-art::after {
+  background: linear-gradient(270deg, transparent 52%, rgba(35, 18, 4, 0.26));
+}
+
+.page-text {
+  display: grid;
+  gap: 3px;
+  padding-top: 10px;
+  text-align: center;
+}
+
+.page-left .page-text {
+  padding-right: 14px;
+}
+
+.page-right .page-text {
+  padding-left: 14px;
+}
+
+.page-heading {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  line-height: 1.35;
+  opacity: 0.88;
+  overflow-wrap: anywhere;
+}
+
+.page-caption {
+  font-size: 13px;
+  font-style: italic;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+}
+
+.page-handle {
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  opacity: 0.65;
+}
+
+.page-number {
+  position: absolute;
+  bottom: 10px;
+  font-size: 12px;
+  opacity: 0.6;
+}
+
+.page-left .page-number {
+  left: 16px;
+}
+
+.page-right .page-number {
+  right: 16px;
+}
+
+.page-hit {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  z-index: 3;
+  width: 50%;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.page-hit-left {
+  left: 0;
+}
+
+.page-hit-right {
+  right: 0;
+}
+
+.page-hit:disabled {
+  cursor: default;
+}
+
+.page-hit:focus-visible {
+  outline: 3px solid rgba(15, 138, 87, 0.5);
+  outline-offset: -3px;
+}
+
+.leaf {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 50%;
+  z-index: 2;
+  transform-style: preserve-3d;
+}
+
+.leaf-next {
+  left: 50%;
+  transform-origin: left center;
+  animation: turn-next 0.8s cubic-bezier(0.45, 0.05, 0.3, 1) forwards;
+}
+
+.leaf-prev {
+  left: 0;
+  transform-origin: right center;
+  animation: turn-prev 0.8s cubic-bezier(0.45, 0.05, 0.3, 1) forwards;
+}
+
+.leaf-face {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.leaf-face::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  pointer-events: none;
+  background: linear-gradient(90deg, rgba(30, 18, 6, 0.5), rgba(30, 18, 6, 0.05));
+  opacity: 0;
+  animation: leaf-shade 0.8s ease-in-out;
+}
+
+.leaf-back {
+  transform: rotateY(180deg);
+}
+
+@keyframes turn-next {
+  to {
+    transform: rotateY(-180deg);
+  }
+}
+
+@keyframes turn-prev {
+  to {
+    transform: rotateY(180deg);
+  }
+}
+
+@keyframes leaf-shade {
+  50% {
+    opacity: 0.55;
+  }
+}
+
+.book-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 6px;
+}
+
+.book-arrow {
+  width: 40px;
+  height: 40px;
+  border: 1px solid rgba(90, 54, 34, 0.35);
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: #efe0bb;
+  color: #3f2d18;
+  box-shadow: 0 4px 10px -4px rgba(60, 35, 15, 0.5);
+  cursor: pointer;
+}
+
+.book-arrow:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+.book-arrow svg {
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.reel-thumbs {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 6px;
+}
+
+.reel-thumb {
+  width: 20px;
+  height: 30px;
+  padding: 0;
+  border: 0;
+  border-radius: 2px 4px 4px 2px;
+  opacity: 0.4;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.reel-thumb.on {
+  opacity: 0.9;
+}
+
+@media (hover: hover) {
+  .reel-thumb:hover {
+    opacity: 0.8;
+  }
+
+  .page-hit-left:hover:not(:disabled) {
+    background: linear-gradient(90deg, rgba(255, 240, 200, 0.2), transparent 35%);
+  }
+
+  .page-hit-right:hover:not(:disabled) {
+    background: linear-gradient(270deg, rgba(255, 240, 200, 0.2), transparent 35%);
+  }
+}
+
+@media (pointer: coarse) {
+  .reel-thumb {
+    width: 24px;
+    height: 36px;
+  }
+}
+
+@media (max-width: 380px) {
+  .page-left {
+    padding-left: 10px;
+  }
+
+  .page-right {
+    padding-right: 10px;
+  }
+
+  .page-heading {
+    font-size: 10px;
+    letter-spacing: 0.08em;
+  }
+
+  .page-caption {
+    font-size: 12px;
+  }
+}
+
+@media (min-width: 600px) {
+  .page-left {
+    padding: 22px 0 42px 20px;
+  }
+
+  .page-right {
+    padding: 22px 20px 42px 0;
+  }
+
+  .page-art {
+    aspect-ratio: 1 / 1.3;
+  }
+
+  .page-heading {
+    font-size: 12px;
+  }
+
+  .page-caption {
+    font-size: 15px;
+  }
+
+  .page-left .page-text {
+    padding-right: 20px;
+  }
+
+  .page-right .page-text {
+    padding-left: 20px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .leaf,
+  .leaf-face::after {
+    animation-duration: 0.01ms;
+  }
+}
+
+.post {
+  display: grid;
+  gap: 12px;
+}
+
+.post-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.post-avatar {
+  flex: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-weight: 700;
+  color: white;
+}
+
+.post-who {
+  font-size: 15px;
+}
+
+.post-book {
+  display: grid;
+  grid-template-columns: 72px 1fr;
+  gap: 14px;
+  align-items: center;
+}
+
+.post .review-quote {
+  margin-top: 0;
+}
+
+.post-actions {
+  display: flex;
+  gap: 8px;
+  padding-top: 4px;
+  border-top: 1px solid var(--line);
+}
+
+.post-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 8px;
+  padding: 6px 12px;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.post-action svg {
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linejoin: round;
+}
+
+.post-action.liked {
+  color: #d6336c;
+}
+
+.post-action.liked svg {
+  fill: currentColor;
+}
+
 .book-card {
   position: relative;
 }
@@ -697,6 +1292,7 @@ button:focus-visible {
 .nav-item {
   display: grid;
   justify-items: center;
+  align-content: center;
   gap: 2px;
   padding: 8px 0;
   border: 0;
@@ -705,8 +1301,10 @@ button:focus-visible {
   color: var(--muted);
   font-size: 11px;
   font-weight: 600;
+  text-decoration: none;
   cursor: pointer;
 }
+
 
 .nav-item svg {
   width: 24px;
@@ -822,6 +1420,11 @@ button:focus-visible {
   main {
     grid-template-columns: 340px 1fr;
     align-items: start;
+  }
+
+  main.feed {
+    grid-template-columns: minmax(0, 640px);
+    justify-content: center;
   }
 
   .side {

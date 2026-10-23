@@ -1,0 +1,6 @@
+.feed > .tabs,
+.feed > .post {
+  box-sizing: border-box;
+  width: min(100%, 640px);
+  justify-self: center;
+}
