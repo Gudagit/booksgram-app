@@ -9,6 +9,7 @@ A social network for book lovers: discover your next read through people with a 
 - **Home feed** with *Following* and *For You* tabs, post cards with likes.
 - **Reels as a book**: an open antique book where each page spread is one reel; tap a page to turn it.
 - **Profile** with shelves (read, reading, to read), favorite books, series, ratings, short reviews and genre tags.
+- **Search** your known books and add them to a shelf (read, reading, to read) or remove them; shelves are kept in your browser.
 - **Edit profile** and **Write a review** as a step-by-step list of fields.
 - **Responsive layout**, mobile first, with a bottom navigation bar.
 - Client-side routing with a 404 page.

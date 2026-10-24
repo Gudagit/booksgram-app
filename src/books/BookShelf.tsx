@@ -4,9 +4,10 @@ import type { Book } from './types'
 type BookShelfProps = {
   books: Book[]
   onSeries?: (book: Book) => void
+  onRemove?: (book: Book) => void
 }
 
-function BookShelf({ books, onSeries }: BookShelfProps) {
+function BookShelf({ books, onSeries, onRemove }: BookShelfProps) {
   if (books.length === 0) {
     return <p className="empty">Nothing here yet.</p>
   }
@@ -20,6 +21,7 @@ function BookShelf({ books, onSeries }: BookShelfProps) {
           author={book.author}
           color={book.color}
           onSeries={book.seriesId && onSeries ? () => onSeries(book) : undefined}
+          onRemove={onRemove ? () => onRemove(book) : undefined}
         />
       ))}
     </div>

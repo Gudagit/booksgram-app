@@ -4,9 +4,10 @@ import type { Book } from './types'
 
 type ReadListProps = {
   books: Book[]
+  onRemove?: (book: Book) => void
 }
 
-function ReadList({ books }: ReadListProps) {
+function ReadList({ books, onRemove }: ReadListProps) {
   if (books.length === 0) {
     return <p className="empty">Nothing here yet.</p>
   }
@@ -26,6 +27,15 @@ function ReadList({ books }: ReadListProps) {
             <p className="review-author">{book.author}</p>
             {book.rating !== undefined && <Stars rating={book.rating} />}
             <ReviewBody book={book} />
+            {onRemove && (
+              <button
+                type="button"
+                className="remove-link"
+                onClick={() => onRemove(book)}
+              >
+                Remove
+              </button>
+            )}
           </div>
         </article>
       ))}

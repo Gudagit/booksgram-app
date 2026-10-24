@@ -2,7 +2,8 @@ import { useState } from 'react'
 import { Link } from 'react-router'
 import BookTabs from '../books/BookTabs'
 import FavoritesShelf from '../books/FavoritesShelf'
-import { fakeFavorites, fakeShelves } from '../books/fakeBooks'
+import { fakeFavorites } from '../books/fakeBooks'
+import { useShelves } from '../books/useShelves'
 import EditProfileSheet from './EditProfileSheet'
 import GenreTags from './GenreTags'
 import ProfileHeader from './ProfileHeader'
@@ -10,18 +11,19 @@ import TastesPanel from './TastesPanel'
 import { fakeFollowers } from './fakeProfile'
 import { useProfile } from './useProfile'
 
-const stats = [
-  { label: 'Read', value: fakeShelves.read.length },
-  {
-    label: 'Reviews',
-    value: fakeShelves.read.filter((book) => book.comment).length,
-  },
-  { label: 'Followers', value: fakeFollowers },
-]
-
 function ProfilePage() {
   const [profile, saveProfile] = useProfile()
+  const { shelves, addBook, removeBook } = useShelves()
   const [editing, setEditing] = useState(false)
+
+  const stats = [
+    { label: 'Read', value: shelves.read.length },
+    {
+      label: 'Reviews',
+      value: shelves.read.filter((book) => book.comment).length,
+    },
+    { label: 'Followers', value: fakeFollowers },
+  ]
 
   return (
     <main>
@@ -40,16 +42,14 @@ function ProfilePage() {
       <div className="content">
         <FavoritesShelf
           books={fakeFavorites.slice(0, 4)}
-          candidates={[
-            ...fakeShelves.read,
-            ...fakeShelves.reading,
-            ...fakeShelves.tbr,
-          ]}
+          candidates={[...shelves.read, ...shelves.reading, ...shelves.tbr]}
         />
         <BookTabs
-          read={fakeShelves.read}
-          reading={fakeShelves.reading}
-          tbr={fakeShelves.tbr}
+          read={shelves.read}
+          reading={shelves.reading}
+          tbr={shelves.tbr}
+          onReview={(book) => addBook('read', book)}
+          onRemove={removeBook}
         />
       </div>
       {editing && (

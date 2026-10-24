@@ -18,20 +18,23 @@ const ratingValues = [0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5]
 const colors = ['tomato', 'steelblue', 'seagreen', 'darkorchid', 'goldenrod', 'slategray']
 
 type ReviewSheetProps = {
+  book?: { title: string; author: string; color: string }
   onSave: (book: Book) => void
   onClose: () => void
 }
 
 type Field = 'title' | 'author' | 'rating' | 'liked' | `group:${string}`
 
-function ReviewSheet({ onSave, onClose }: ReviewSheetProps) {
-  const [title, setTitle] = useState('')
-  const [author, setAuthor] = useState('')
+function ReviewSheet({ book: prefilled, onSave, onClose }: ReviewSheetProps) {
+  const [title, setTitle] = useState(prefilled?.title ?? '')
+  const [author, setAuthor] = useState(prefilled?.author ?? '')
   const [rating, setRating] = useState(3)
   const [liked, setLiked] = useState('')
   const [tags, setTags] = useState<string[]>([])
   const [spoiler, setSpoiler] = useState(false)
-  const [pickedColor, setPickedColor] = useState<string>()
+  const [pickedColor, setPickedColor] = useState<string | undefined>(
+    prefilled?.color,
+  )
   const [field, setField] = useState<Field | null>(null)
 
   const typedTitle = title.trim().toLowerCase()

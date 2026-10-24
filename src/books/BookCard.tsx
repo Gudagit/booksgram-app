@@ -3,9 +3,10 @@ type BookCardProps = {
   author: string
   color: string
   onSeries?: () => void
+  onRemove?: () => void
 }
 
-function BookCard({ title, author, color, onSeries }: BookCardProps) {
+function BookCard({ title, author, color, onSeries, onRemove }: BookCardProps) {
   return (
     <div className="book-card">
       <div className="cover book-card-cover" style={{ backgroundColor: color }}>
@@ -27,6 +28,11 @@ function BookCard({ title, author, color, onSeries }: BookCardProps) {
       )}
       <p className="book-card-title">{title}</p>
       <p className="book-card-author">{author}</p>
+      {onRemove && (
+        <button type="button" className="remove-link" onClick={onRemove}>
+          Remove
+        </button>
+      )}
     </div>
   )
 }

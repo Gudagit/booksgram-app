@@ -12,6 +12,8 @@ type BookTabsProps = {
   read: Book[]
   reading: Book[]
   tbr: Book[]
+  onReview: (book: Book) => void
+  onRemove: (book: Book) => void
 }
 
 const tabs: { key: TabKey; label: string }[] = [
@@ -20,12 +22,17 @@ const tabs: { key: TabKey; label: string }[] = [
   { key: 'tbr', label: 'To read' },
 ]
 
-function BookTabs({ read, reading, tbr }: BookTabsProps) {
+function BookTabs({ read, reading, tbr, onReview, onRemove }: BookTabsProps) {
   const [active, setActive] = useState<TabKey>('read')
-  const [readBooks, setReadBooks] = useState(read)
   const [openSeries, setOpenSeries] = useState<string | null>(null)
   const [writing, setWriting] = useState(false)
-  const lists = { read: readBooks, reading, tbr }
+  const lists = { read, reading, tbr }
+
+  function confirmRemove(book: Book) {
+    if (window.confirm(`Remove "${book.title}" from your shelves?`)) {
+      onRemove(book)
+    }
+  }
 
   return (
     <section className="panel">
@@ -53,12 +60,13 @@ function BookTabs({ read, reading, tbr }: BookTabsProps) {
           >
             Write a review
           </button>
-          <ReadList books={lists.read} />
+          <ReadList books={lists.read} onRemove={confirmRemove} />
         </>
       ) : (
         <BookShelf
           books={lists[active]}
           onSeries={(book) => setOpenSeries(book.seriesId ?? null)}
+          onRemove={confirmRemove}
         />
       )}
       {openSeries && fakeSeries[openSeries] && (
@@ -69,7 +77,7 @@ function BookTabs({ read, reading, tbr }: BookTabsProps) {
       )}
       {writing && (
         <ReviewSheet
-          onSave={(book) => setReadBooks([book, ...readBooks])}
+          onSave={onReview}
           onClose={() => setWriting(false)}
         />
       )}
