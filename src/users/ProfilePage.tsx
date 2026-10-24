@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Link } from 'react-router'
 import BookTabs from '../books/BookTabs'
 import FavoritesShelf from '../books/FavoritesShelf'
 import { fakeFavorites, fakeShelves } from '../books/fakeBooks'
@@ -32,6 +33,9 @@ function ProfilePage() {
         />
         <GenreTags genres={profile.genres} />
         <TastesPanel profile={profile} />
+        <Link to="/credits" className="credits-link">
+          Credits and licenses
+        </Link>
       </div>
       <div className="content">
         <FavoritesShelf
