@@ -1,12 +1,12 @@
 :root {
-  --ink: #13241a;
-  --muted: #5d6d63;
-  --accent: #0f8a57;
-  --accent-soft: #e0f5ea;
+  --ink: #2b2616;
+  --muted: #6a6148;
+  --accent: #80652b;
+  --accent-soft: #f3e9d0;
   --star: #f5a524;
-  --star-off: #dfe6e1;
-  --line: rgba(19, 36, 26, 0.08);
-  --panel: rgba(255, 255, 255, 0.82);
+  --star-off: #e9dfc0;
+  --line: rgba(60, 48, 20, 0.08);
+  --panel: rgba(255, 252, 242, 0.86);
 
   --font: 'Inter Variable', system-ui, sans-serif;
   --cover-font: 'Lora Variable', Georgia, serif;
@@ -20,12 +20,12 @@ body {
   margin: 0;
   min-height: 100svh;
   overflow-x: clip;
-  background-color: #f3f7f4;
+  background-color: #f6efdf;
   background-image:
-    radial-gradient(60% 45% at 12% 8%, rgba(120, 220, 170, 0.45), transparent 70%),
-    radial-gradient(50% 40% at 92% 12%, rgba(255, 196, 170, 0.5), transparent 70%),
-    radial-gradient(55% 45% at 85% 70%, rgba(150, 200, 255, 0.45), transparent 70%),
-    radial-gradient(50% 40% at 8% 80%, rgba(200, 180, 255, 0.35), transparent 70%);
+    radial-gradient(60% 45% at 12% 8%, rgba(236, 218, 170, 0.5), transparent 70%),
+    radial-gradient(50% 40% at 92% 12%, rgba(246, 232, 200, 0.6), transparent 70%),
+    radial-gradient(55% 45% at 85% 70%, rgba(240, 226, 190, 0.5), transparent 70%),
+    radial-gradient(50% 40% at 8% 80%, rgba(250, 243, 225, 0.6), transparent 70%);
   background-attachment: fixed;
 }
 
@@ -61,7 +61,7 @@ button {
 }
 
 button:focus-visible {
-  outline: 3px solid rgba(15, 138, 87, 0.45);
+  outline: 3px solid rgba(176, 140, 70, 0.5);
   outline-offset: 2px;
 }
 
@@ -70,8 +70,8 @@ button:focus-visible {
   border: 1px solid rgba(255, 255, 255, 0.9);
   border-radius: 28px;
   box-shadow:
-    0 1px 2px rgba(19, 36, 26, 0.04),
-    0 12px 32px -12px rgba(19, 36, 26, 0.14);
+    0 1px 2px rgba(60, 48, 20, 0.04),
+    0 12px 32px -12px rgba(60, 48, 20, 0.14);
   padding: 20px;
 }
 
@@ -87,20 +87,47 @@ button:focus-visible {
   font-size: 13px;
 }
 
+/* A book cover painted in CSS, no pictures: the base color from the data is muted
+   by a dark layer; on top come cloth weave and grain, the hinge groove by the spine,
+   a soft sheen and worn corners, and a thin foil frame. */
+:root {
+  --cover-finish:
+    radial-gradient(circle at 100% 100%, rgba(255, 240, 200, 0.22), transparent 9%),
+    radial-gradient(circle at 100% 0, rgba(255, 240, 200, 0.16), transparent 8%),
+    radial-gradient(circle at 0 100%, rgba(255, 240, 200, 0.12), transparent 7%),
+    linear-gradient(115deg, rgba(255, 255, 255, 0.16) 0, rgba(255, 255, 255, 0.04) 28%, transparent 46%, rgba(0, 0, 0, 0.12) 100%),
+    linear-gradient(90deg, transparent 7.5%, rgba(0, 0, 0, 0.4) 9%, rgba(255, 255, 255, 0.16) 10.4%, transparent 12%),
+    linear-gradient(90deg, rgba(0, 0, 0, 0.42) 0, rgba(255, 255, 255, 0.1) 3%, rgba(0, 0, 0, 0.06) 6%, transparent 7.5%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(0, 0, 0, 0.28)),
+    linear-gradient(rgba(46, 38, 26, 0.5), rgba(46, 38, 26, 0.5)),
+    repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.2) 0 1px, transparent 1px 3px),
+    repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.07) 0 1px, transparent 1px 3px),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .3 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
 .cover {
-  background-image:
-    linear-gradient(90deg, rgba(0, 0, 0, 0.18) 0, rgba(255, 255, 255, 0.16) 4%, transparent 12%),
-    linear-gradient(135deg, rgba(255, 255, 255, 0.18), rgba(0, 0, 0, 0.18));
-  color: white;
+  position: relative;
+  background-image: var(--cover-finish);
+  color: #ecd9a3;
   font-family: var(--cover-font);
-  font-weight: 700;
+  font-weight: 600;
+  letter-spacing: 0.02em;
   line-height: 1.25;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.65), 0 -1px 0 rgba(255, 255, 255, 0.1);
   box-sizing: border-box;
-  box-shadow: 0 10px 20px -8px rgba(19, 36, 26, 0.4);
+  box-shadow: 0 10px 20px -8px rgba(60, 48, 20, 0.4);
   transition: transform 0.2s ease;
   overflow-wrap: anywhere;
   overflow: hidden;
+}
+
+.cover::after {
+  content: "";
+  position: absolute;
+  inset: 6px 6px 6px 11px;
+  border: 1px solid rgba(235, 215, 165, 0.32);
+  border-radius: 1px 3px 3px 1px;
+  pointer-events: none;
 }
 
 .hero {
@@ -111,7 +138,7 @@ button:focus-visible {
 
 .hero-banner {
   height: 112px;
-  background: linear-gradient(120deg, #9be3bf, #b9d9ff 55%, #ffd2bd);
+  background: linear-gradient(120deg, #efe3c6, #e2cf9f 55%, #f3ead2);
 }
 
 .hero-body {
@@ -129,9 +156,9 @@ button:focus-visible {
   font-size: 38px;
   font-weight: 700;
   color: white;
-  background: linear-gradient(135deg, #34c38a, #0f8a57);
+  background: linear-gradient(135deg, #e3cc92, #c39a30);
   border: 4px solid white;
-  box-shadow: 0 8px 20px -6px rgba(15, 138, 87, 0.5);
+  box-shadow: 0 8px 20px -6px rgba(176, 140, 70, 0.5);
 }
 
 .hero h1 {
@@ -174,9 +201,9 @@ button:focus-visible {
   padding: 12px 28px;
   font-size: 14px;
   font-weight: 600;
-  color: white;
-  background: linear-gradient(135deg, #14a463, #0f8a57);
-  box-shadow: 0 8px 20px -8px rgba(15, 138, 87, 0.7);
+  color: #3a2e14;
+  background: linear-gradient(135deg, #ecd9aa, #d9bd7e);
+  box-shadow: 0 8px 20px -8px rgba(140, 110, 50, 0.4);
   cursor: pointer;
 }
 
@@ -190,7 +217,7 @@ button:focus-visible {
   padding: 7px 14px;
   border-radius: 999px;
   background: var(--accent-soft);
-  color: #0d6b43;
+  color: #5e4a22;
   font-size: 14px;
   font-weight: 600;
 }
@@ -244,14 +271,14 @@ button:focus-visible {
   border: 1px solid transparent;
   font-family: inherit;
   cursor: pointer;
-  background: rgba(19, 36, 26, 0.05);
+  background: rgba(60, 48, 20, 0.05);
   color: var(--ink);
   font-weight: 500;
 }
 
 .chip-toggle[aria-pressed='true'] {
-  background: var(--accent);
-  color: white;
+  background: #e3cc92;
+  color: #3a2e14;
   font-weight: 600;
 }
 
@@ -262,7 +289,7 @@ button:focus-visible {
 }
 
 .button.ghost {
-  background: rgba(19, 36, 26, 0.06);
+  background: rgba(60, 48, 20, 0.06);
   color: var(--ink);
   box-shadow: none;
 }
@@ -271,7 +298,7 @@ button:focus-visible {
   display: grid;
   place-items: center;
   aspect-ratio: 2 / 3;
-  border: 2px dashed rgba(19, 36, 26, 0.22);
+  border: 2px dashed rgba(60, 48, 20, 0.22);
   border-radius: 12px;
   background: rgba(255, 255, 255, 0.4);
   color: var(--muted);
@@ -301,7 +328,7 @@ button:focus-visible {
   background: white;
   border: 1px solid var(--line);
   border-radius: 14px;
-  box-shadow: 0 12px 28px -10px rgba(19, 36, 26, 0.3);
+  box-shadow: 0 12px 28px -10px rgba(60, 48, 20, 0.3);
 }
 
 .pick-list {
@@ -349,10 +376,10 @@ button:focus-visible {
 .fav-cover {
   display: block;
   aspect-ratio: 2 / 3;
-  padding: 8px;
-  border-radius: 12px;
+  padding: 14px 9px 9px 16px;
+  border-radius: 2px 5px 5px 2px;
   font-size: 11px;
-  box-shadow: 0 14px 24px -10px rgba(19, 36, 26, 0.45);
+  box-shadow: 0 14px 24px -10px rgba(60, 48, 20, 0.45);
 }
 
 .tabs {
@@ -362,7 +389,7 @@ button:focus-visible {
   padding: 4px;
   margin-bottom: 18px;
   border-radius: 999px;
-  background: rgba(19, 36, 26, 0.06);
+  background: rgba(60, 48, 20, 0.06);
 }
 
 .tab {
@@ -382,7 +409,7 @@ button:focus-visible {
 .tab.active {
   background: white;
   color: var(--ink);
-  box-shadow: 0 2px 8px rgba(19, 36, 26, 0.12);
+  box-shadow: 0 2px 8px rgba(60, 48, 20, 0.12);
 }
 
 .tab-count {
@@ -399,8 +426,8 @@ button:focus-visible {
 
 .book-card-cover {
   aspect-ratio: 2 / 3;
-  padding: 10px;
-  border-radius: 12px;
+  padding: 14px 9px 9px 16px;
+  border-radius: 2px 5px 5px 2px;
   font-size: 14px;
 }
 
@@ -433,8 +460,8 @@ button:focus-visible {
 
 .review-cover {
   aspect-ratio: 2 / 3;
-  padding: 8px;
-  border-radius: 10px;
+  padding: 14px 9px 9px 16px;
+  border-radius: 2px 5px 5px 2px;
   font-size: 11px;
 }
 
@@ -452,7 +479,7 @@ button:focus-visible {
   margin-top: 8px;
   padding: 10px 12px;
   border-radius: 12px;
-  background: rgba(19, 36, 26, 0.04);
+  background: rgba(60, 48, 20, 0.04);
   font-size: 14px;
 }
 
@@ -825,7 +852,7 @@ button:focus-visible {
 }
 
 .page-hit:focus-visible {
-  outline: 3px solid rgba(15, 138, 87, 0.5);
+  outline: 3px solid rgba(176, 140, 70, 0.5);
   outline-offset: -3px;
 }
 
@@ -1140,7 +1167,7 @@ button:focus-visible {
   display: grid;
   align-items: end;
   justify-items: center;
-  background: rgba(19, 36, 26, 0.35);
+  background: rgba(60, 48, 20, 0.35);
 }
 
 .sheet {
@@ -1176,8 +1203,8 @@ button:focus-visible {
 .series-cover {
   display: block;
   aspect-ratio: 2 / 3;
-  padding: 8px;
-  border-radius: 12px;
+  padding: 14px 9px 9px 16px;
+  border-radius: 2px 5px 5px 2px;
   font-size: 11px;
 }
 
@@ -1285,7 +1312,7 @@ button:focus-visible {
   -webkit-backdrop-filter: blur(18px) saturate(1.4);
   backdrop-filter: blur(18px) saturate(1.4);
   border: 1px solid rgba(255, 255, 255, 0.9);
-  box-shadow: 0 16px 40px -12px rgba(19, 36, 26, 0.3);
+  box-shadow: 0 16px 40px -12px rgba(60, 48, 20, 0.3);
   z-index: 10;
 }
 
@@ -1556,12 +1583,11 @@ button:focus-visible {
 
 /* Search: warm paper tones, serif titles */
 .search {
-  --paper: #fffaf0;
-  --paper-deep: #f7ecd0;
-  --paper-line: rgba(150, 110, 40, 0.24);
-  --paper-ink: #2a2118;
-  --paper-soft: #6b5d48;
-  --gold: #7a5b14;
+  --paper: #fffdf7;
+  --paper-line: rgba(70, 55, 20, 0.18);
+  --paper-ink: #2b2616;
+  --paper-soft: #655c42;
+  --gold: #80652b;
 }
 
 .search-hero {
@@ -1645,9 +1671,16 @@ button:focus-visible {
   border: 1px solid var(--paper-line);
   border-radius: 18px;
   background:
-    linear-gradient(90deg, rgba(120, 80, 20, 0.1), transparent 22px),
-    linear-gradient(var(--paper), #faf0d6);
-  box-shadow: 0 14px 24px -18px rgba(90, 60, 10, 0.6);
+    linear-gradient(
+      90deg,
+      rgba(70, 45, 15, 0.2),
+      rgba(70, 45, 15, 0.06) 14px,
+      transparent 34px
+    ),
+    linear-gradient(rgba(253, 250, 241, 0.93), rgba(253, 250, 241, 0.93)),
+    url('/textures/paper.jpg') center / cover;
+  background-color: #fbf6ea;
+  box-shadow: 0 14px 24px -18px rgba(60, 40, 10, 0.6);
   color: var(--paper-ink);
   text-align: left;
   cursor: pointer;
@@ -1684,9 +1717,10 @@ button:focus-visible {
 
 .search-cover {
   flex: none;
+  background-image: var(--cover-finish);
   width: 42px;
   height: 60px;
-  border-radius: 3px 8px 8px 3px;
+  border-radius: 2px 5px 5px 2px;
   box-shadow:
     inset 5px 0 6px rgba(0, 0, 0, 0.22),
     0 5px 10px -3px rgba(60, 40, 10, 0.4);
@@ -1696,17 +1730,17 @@ button:focus-visible {
   flex: none;
   padding: 5px 12px;
   border-radius: 999px;
-  background: #f4e1a3;
-  color: #5e4410;
+  background: rgba(176, 140, 70, 0.12);
+  color: #5e4a22;
   font-size: 13px;
   font-weight: 600;
 }
 
 .search-added {
   padding: 13px 16px;
-  border: 1px solid rgba(201, 154, 46, 0.5);
+  border: 1px solid var(--paper-line);
   border-radius: 16px;
-  background: #fbf1cf;
+  background: #fbf6ea;
   color: var(--paper-ink);
   font-size: 14px;
 }
@@ -1724,20 +1758,220 @@ button:focus-visible {
   width: 100%;
   padding: 14px 20px;
   border-radius: 14px;
-  background: linear-gradient(180deg, #faecc0, #f0d98f);
+  background: #fffdf7;
   box-shadow:
-    inset 0 0 0 1px rgba(160, 115, 30, 0.45),
-    0 8px 16px -12px rgba(90, 60, 10, 0.6);
-  color: #3a2c10;
+    inset 0 0 0 1px rgba(70, 55, 20, 0.32),
+    0 8px 16px -12px rgba(60, 40, 10, 0.5);
+  color: #2b2616;
 }
 
 .sheet .shelf-choices .button:disabled {
   opacity: 0.45;
-  box-shadow: inset 0 0 0 1px rgba(160, 115, 30, 0.3);
+  box-shadow: inset 0 0 0 1px rgba(70, 55, 20, 0.2);
+}
+
+.add-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 14px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.add-opinions {
+  margin-top: 16px;
+}
+
+.add-opinions h3 {
+  margin: 0 0 6px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+.add-opinions blockquote {
+  margin: 0 0 10px;
+  padding: 10px 12px;
+  border-left: 3px solid var(--accent);
+  border-radius: 0 6px 6px 0;
+  background: rgba(176, 140, 70, 0.07);
+}
+
+.add-opinions blockquote p {
+  margin: 0;
+  font-style: italic;
+  overflow-wrap: anywhere;
+}
+
+.add-opinions footer {
+  margin-top: 4px;
+  color: var(--ink-soft);
+  font-size: 13px;
 }
 
 .sheet .shelf-choices .button.ghost {
   background: transparent;
-  box-shadow: inset 0 0 0 1px rgba(60, 45, 25, 0.3);
-  color: #5c4f40;
+  box-shadow: inset 0 0 0 1px rgba(70, 55, 20, 0.3);
+  color: #655c42;
+}
+
+/* Sign in and create account */
+.auth-form {
+  display: grid;
+  gap: 16px;
+}
+
+.auth-form .button {
+  width: 100%;
+  padding: 14px 20px;
+}
+
+.auth-form .button:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.auth-form .field input {
+  background: #fffdf7;
+  font-size: 16px;
+}
+
+.auth-message {
+  padding: 11px 14px;
+  border-radius: 12px;
+  background: var(--accent-soft);
+  color: var(--ink);
+  font-size: 14px;
+}
+
+.auth > a {
+  justify-self: start;
+  color: var(--accent);
+  font-weight: 600;
+}
+
+/* Account icons in the top right corner */
+.account-corner {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.corner-button {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: var(--panel);
+  box-shadow: 0 8px 18px -12px rgba(60, 48, 20, 0.5);
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.corner-button svg {
+  width: 22px;
+  height: 22px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.corner-button:focus-visible {
+  outline: 3px solid rgba(176, 140, 70, 0.55);
+  outline-offset: 2px;
+}
+
+.corner-initial {
+  background: linear-gradient(135deg, #ecd9aa, #d9bd7e);
+  color: #3a2e14;
+  font-size: 17px;
+  font-weight: 700;
+}
+
+/* grey "keep typing" suggestion, drawn on top of the search field */
+.search-box {
+  position: relative;
+}
+
+.search-ghost {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  padding: 0 18px 0 50px;
+  overflow: hidden;
+  font: inherit;
+  font-size: 16px;
+  white-space: pre;
+  pointer-events: none;
+}
+
+.ghost-typed {
+  color: transparent;
+}
+
+.ghost-rest {
+  color: #a79b80;
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+/* Leather binding: the grain is a real leather scan (ambientCG Leather030, CC0),
+   blended over the book color so one grain gives many colors. */
+:root {
+  --leather-finish:
+    radial-gradient(circle at 100% 100%, rgba(255, 240, 200, 0.22), transparent 9%),
+    radial-gradient(circle at 100% 0, rgba(255, 240, 200, 0.16), transparent 8%),
+    radial-gradient(circle at 0 100%, rgba(255, 240, 200, 0.12), transparent 7%),
+    linear-gradient(115deg, rgba(255, 255, 255, 0.14) 0, rgba(255, 255, 255, 0.03) 28%, transparent 46%, rgba(0, 0, 0, 0.14) 100%),
+    linear-gradient(90deg, transparent 7.5%, rgba(0, 0, 0, 0.42) 9%, rgba(255, 255, 255, 0.14) 10.4%, transparent 12%),
+    linear-gradient(90deg, rgba(0, 0, 0, 0.45) 0, rgba(255, 255, 255, 0.08) 3%, rgba(0, 0, 0, 0.06) 6%, transparent 7.5%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(0, 0, 0, 0.3)),
+    linear-gradient(rgba(30, 22, 14, 0.3), rgba(30, 22, 14, 0.3)),
+    url('/textures/leather-grain.jpg');
+}
+
+.cover.leather,
+.search-cover.leather {
+  background-image: var(--leather-finish);
+  background-size: auto, auto, auto, auto, auto, auto, auto, auto, 220px 220px;
+  background-blend-mode: normal, normal, normal, normal, normal, normal, normal, normal, overlay;
+  color: #e6cd8e;
+}
+
+/* tooled gold lines: a thin frame with a second line inside it */
+.cover.leather::after {
+  border-color: rgba(226, 200, 135, 0.5);
+  outline: 1px solid rgba(226, 200, 135, 0.28);
+  outline-offset: -4px;
+}
+
+/* Leather tones: the colors of real bound books. */
+.tone-chestnut { background-color: #6a3e22; }
+.tone-chocolate { background-color: #3d2417; }
+.tone-cognac { background-color: #8a5a2b; }
+.tone-tan { background-color: #bf9d6c; }
+.tone-oxblood { background-color: #5a1f1f; }
+.tone-green { background-color: #2f4a37; }
+.tone-navy { background-color: #26354d; }
+.tone-black { background-color: #26262a; }
+
+/* light leather: dark lettering, like ink pressed into pale calf */
+.cover.tone-tan {
+  color: #1f150a;
+  text-shadow: 0 1px 0 rgba(255, 240, 210, 0.6);
+  font-weight: 700;
+}
+
+.cover.tone-tan::after {
+  border-color: rgba(31, 21, 10, 0.6);
+  outline-color: rgba(31, 21, 10, 0.35);
 }

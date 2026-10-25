@@ -1,3 +1,4 @@
+import { coverStyle } from './coverStyle'
 type BookCardProps = {
   title: string
   author: string
@@ -6,10 +7,10 @@ type BookCardProps = {
   onRemove?: () => void
 }
 
-function BookCard({ title, author, color, onSeries, onRemove }: BookCardProps) {
+function BookCard({ title, author, onSeries, onRemove }: BookCardProps) {
   return (
     <div className="book-card">
-      <div className="cover book-card-cover" style={{ backgroundColor: color }}>
+      <div className={`cover ${coverStyle(title)} book-card-cover`}>
         {title}
       </div>
       {onSeries && (

@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Link } from 'react-router'
+import { useAuth } from '../auth/useAuth'
 import BookTabs from '../books/BookTabs'
 import FavoritesShelf from '../books/FavoritesShelf'
 import { fakeFavorites } from '../books/fakeBooks'
@@ -12,6 +13,7 @@ import { fakeFollowers } from './fakeProfile'
 import { useProfile } from './useProfile'
 
 function ProfilePage() {
+  const { user } = useAuth()
   const [profile, saveProfile] = useProfile()
   const { shelves, addBook, removeBook } = useShelves()
   const [editing, setEditing] = useState(false)
@@ -35,6 +37,9 @@ function ProfilePage() {
         />
         <GenreTags genres={profile.genres} />
         <TastesPanel profile={profile} />
+        <Link to="/login" className="credits-link">
+          {user ? `Signed in as ${user.email}` : 'Sign in or create an account'}
+        </Link>
         <Link to="/credits" className="credits-link">
           Credits and licenses
         </Link>

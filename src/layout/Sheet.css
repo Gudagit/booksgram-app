@@ -18,11 +18,11 @@
 }
 
 .sheet {
-  --ink: #2a2118;
-  --ink-soft: #5c4f40;
-  --line: rgba(60, 45, 25, 0.18);
-  --accent: #6b4429;
-  --accent-soft: rgba(107, 68, 41, 0.1);
+  --ink: #2b2616;
+  --ink-soft: #655c42;
+  --line: rgba(70, 55, 20, 0.18);
+  --accent: #80652b;
+  --accent-soft: rgba(176, 140, 70, 0.1);
   box-sizing: border-box;
   width: 100%;
   max-height: calc(100svh - 32px);
@@ -104,7 +104,7 @@
 .sheet .field input,
 .sheet .field textarea {
   padding: 11px 12px;
-  border: 1px solid rgba(60, 45, 25, 0.32);
+  border: 1px solid rgba(70, 55, 20, 0.32);
   border-radius: 6px;
   background: #fffdf7;
   color: var(--ink);
@@ -113,14 +113,14 @@
 
 .sheet .field input:focus-visible,
 .sheet .field textarea:focus-visible {
-  outline: 2px solid rgba(107, 68, 41, 0.55);
+  outline: 2px solid rgba(176, 140, 70, 0.55);
   outline-offset: 1px;
 }
 
 .sheet .button {
-  background: linear-gradient(135deg, #7a4d2e, #4e2f1b);
-  box-shadow: 0 6px 14px -8px rgba(60, 30, 10, 0.7);
-  color: #fff8e8;
+  background: linear-gradient(135deg, #ecd9aa, #d9bd7e);
+  box-shadow: 0 6px 14px -8px rgba(140, 110, 50, 0.45);
+  color: #3a2e14;
 }
 
 .sheet .button:disabled {
@@ -136,12 +136,12 @@
 }
 
 .sheet .chip {
-  background: rgba(107, 68, 41, 0.1);
-  color: #4d3620;
+  background: rgba(176, 140, 70, 0.1);
+  color: #5e4a22;
 }
 
 .sheet .chip-toggle {
-  border: 1px solid rgba(60, 45, 25, 0.2);
+  border: 1px solid rgba(70, 55, 20, 0.2);
   background: #fffdf7;
   color: var(--ink);
   font-size: 14px;
@@ -149,9 +149,9 @@
 }
 
 .sheet .chip-toggle[aria-pressed='true'] {
-  border-color: #6b4429;
-  background: #6b4429;
-  color: #fff8e8;
+  border-color: #c4a265;
+  background: #e3cc92;
+  color: #3a2e14;
   font-weight: 600;
 }
 
@@ -162,11 +162,11 @@
 
 .sheet .review-quote,
 .sheet .series-detail {
-  background: rgba(107, 68, 41, 0.07);
+  background: rgba(176, 140, 70, 0.07);
 }
 
 .sheet .link-btn {
-  color: #7a4a1e;
+  color: #80652b;
 }
 
 .sheet .suggest-list {
@@ -181,7 +181,7 @@
 
 .sheet .suggest-list button:hover,
 .sheet .pick-list button:hover {
-  background: rgba(107, 68, 41, 0.12);
+  background: rgba(176, 140, 70, 0.12);
 }
 
 /* spacing for editors that are not forms */
@@ -270,7 +270,7 @@
   width: 40px;
   height: 24px;
   border-radius: 999px;
-  background: rgba(60, 45, 25, 0.28);
+  background: rgba(70, 55, 20, 0.28);
   transition: background 0.2s ease;
 }
 
@@ -287,7 +287,7 @@
 }
 
 .switch.on {
-  background: #6b4429;
+  background: #cfae6a;
 }
 
 .switch.on::after {

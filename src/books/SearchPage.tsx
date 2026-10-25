@@ -1,13 +1,13 @@
+import { coverStyle } from './coverStyle'
 import { useState } from 'react'
+import type { KeyboardEvent } from 'react'
 import { Link } from 'react-router'
 import AddBookSheet from './AddBookSheet'
-import { getKnownBooks } from './knownBooks'
 import type { KnownBook } from './knownBooks'
 import ReviewSheet from './ReviewSheet'
+import { useBookSearch } from './useBookSearch'
 import { shelfLabels, useShelves } from './useShelves'
 import type { ShelfKey } from './useShelves'
-
-const books = getKnownBooks()
 
 function SearchPage() {
   const { addBook, removeBook, shelfOf } = useShelves()
@@ -16,12 +16,26 @@ function SearchPage() {
   const [reviewing, setReviewing] = useState<KnownBook | null>(null)
   const [added, setAdded] = useState<string | null>(null)
 
-  const text = query.trim().toLowerCase()
-  const results = books.filter(
-    (book) =>
-      book.title.toLowerCase().includes(text) ||
-      book.author.toLowerCase().includes(text),
-  )
+  const text = query.trim()
+  const { results, pool, loading, loadingMore, failed, tooShort } = useBookSearch(query)
+
+  // the grey rest of a title or author that starts with what was typed so far
+  const typed = query.toLowerCase()
+  const suggestion =
+    typed.trim().length >= 2
+      ? pool
+          .flatMap((book) => [book.title, book.author.split(', ')[0]])
+          .find((name) => name.length > typed.length && name.toLowerCase().startsWith(typed))
+      : undefined
+  const ghostRest = suggestion ? suggestion.slice(query.length) : ''
+
+  function handleKeyDown(event: KeyboardEvent<HTMLInputElement>) {
+    const atEnd = event.currentTarget.selectionStart === query.length
+    if ((event.key === 'Tab' || event.key === 'ArrowRight') && suggestion && atEnd) {
+      event.preventDefault()
+      setQuery(suggestion)
+    }
+  }
 
   function handlePick(shelf: ShelfKey) {
     if (!picked) return
@@ -53,17 +67,29 @@ function SearchPage() {
         <h1>Search</h1>
         <p>Find a book and put it on one of your shelves.</p>
       </header>
-      <input
-        type="search"
-        value={query}
-        placeholder="Title or author"
-        aria-label="Search books"
-        onChange={(event) => setQuery(event.target.value)}
-      />
+      <div className="search-box">
+        <input
+          type="search"
+          value={query}
+          placeholder="Title or author"
+          aria-label="Search books"
+          autoComplete="off"
+          onChange={(event) => setQuery(event.target.value)}
+          onKeyDown={handleKeyDown}
+        />
+        {suggestion && (
+          <div className="search-ghost" aria-hidden="true">
+            <span className="ghost-typed">{query}</span>
+            <span className="ghost-rest" onClick={() => setQuery(suggestion)}>
+              {ghostRest}
+            </span>
+          </div>
+        )}
+      </div>
 
       {added && (
         <p className="search-added" role="status">
-          {added} <Link to="/profile">View profile</Link>
+          {added} <Link to="/">View profile</Link>
         </p>
       )}
 
@@ -76,6 +102,16 @@ function SearchPage() {
           </svg>
           <p>Type a title or an author to find a book.</p>
         </div>
+      ) : tooShort ? (
+        <p className="muted">Type at least 2 letters.</p>
+      ) : loading || (results.length === 0 && loadingMore) ? (
+        <p className="muted" role="status">
+          Searching…
+        </p>
+      ) : failed ? (
+        <p className="muted" role="status">
+          Search is not available right now. Check your connection and try again.
+        </p>
       ) : results.length === 0 ? (
         <p className="muted">No books found for "{query}".</p>
       ) : (
@@ -94,8 +130,7 @@ function SearchPage() {
                     onClick={() => setPicked(book)}
                   >
                     <span
-                      className="search-cover"
-                      style={{ background: book.color }}
+                      className={`search-cover ${coverStyle(book.title)}`}
                     />
                     <span className="search-text">
                       <strong>{book.title}</strong>
@@ -109,6 +144,11 @@ function SearchPage() {
               )
             })}
           </ul>
+          {loadingMore && (
+            <p className="muted" role="status">
+              Looking for more books…
+            </p>
+          )}
         </>
       )}
 

@@ -9,7 +9,7 @@ export const avatarColors = [
   { id: 'blue', label: 'Blue', css: 'linear-gradient(135deg, #5aa2e0, #2d6a8f)' },
   { id: 'purple', label: 'Purple', css: 'linear-gradient(135deg, #a98bdc, #6a4a9f)' },
   { id: 'rose', label: 'Rose', css: 'linear-gradient(135deg, #ef8fb0, #c0405f)' },
-  { id: 'gold', label: 'Gold', css: 'linear-gradient(135deg, #e6c15a, #b8892b)' },
+  { id: 'gold', label: 'Gold', css: 'linear-gradient(135deg, #dcc08a, #b99556)' },
   { id: 'slate', label: 'Slate', css: 'linear-gradient(135deg, #8a9aa8, #4f5f6b)' },
 ]
 

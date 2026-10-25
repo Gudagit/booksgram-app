@@ -15,10 +15,25 @@ const images: CreditItem[] = [
     href: 'https://ambientcg.com/view?id=Leather014',
   },
   {
+    name: 'Leather grain on book covers, "Leather 030"',
+    author: 'ambientCG',
+    license: 'CC0 1.0',
+    href: 'https://ambientcg.com/view?id=Leather030',
+  },
+  {
     name: 'Paper texture, "Paper 006"',
     author: 'ambientCG',
     license: 'CC0 1.0',
     href: 'https://ambientcg.com/view?id=Paper006',
+  },
+]
+
+const data: CreditItem[] = [
+  {
+    name: 'Book titles and authors in search',
+    author: 'Wikidata contributors',
+    license: 'CC0 1.0',
+    href: 'https://www.wikidata.org',
   },
 ]
 
@@ -93,10 +108,11 @@ function CreditsPage() {
         and is used under the licenses shown.
       </p>
       <CreditList title="Images" items={images} />
+      <CreditList title="Data" items={data} />
       <CreditList title="Fonts" items={fonts} />
       <CreditList title="Libraries" items={libraries} />
       <p>Smaller supporting packages are licensed under MIT or 0BSD.</p>
-      <Link to="/">Back to Home</Link>
+      <Link to="/">Back to Profile</Link>
     </main>
   )
 }

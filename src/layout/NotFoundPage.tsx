@@ -5,7 +5,7 @@ function NotFoundPage() {
     <main className="feed">
       <h1>Page not found</h1>
       <p>This page does not exist.</p>
-      <Link to="/">Back to Home</Link>
+      <Link to="/">Back to Profile</Link>
     </main>
   )
 }

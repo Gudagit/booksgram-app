@@ -1,3 +1,4 @@
+import { coverStyle } from './coverStyle'
 import { useState } from 'react'
 import Sheet from '../layout/Sheet'
 import Stars from './Stars'
@@ -31,8 +32,7 @@ function SeriesSheet({ series, onClose }: SeriesSheetProps) {
             onClick={() => setSelected(entry)}
           >
             <span
-              className="cover series-cover"
-              style={{ backgroundColor: entry.color }}
+              className={`cover ${coverStyle(entry.title)} series-cover`}
             >
               {entry.title}
             </span>

@@ -1,3 +1,4 @@
+import { coverStyle } from './coverStyle'
 import ReviewBody from './ReviewBody'
 import Stars from './Stars'
 import type { Book } from './types'
@@ -17,8 +18,7 @@ function ReadList({ books, onRemove }: ReadListProps) {
       {books.map((book) => (
         <article key={book.id} className="review">
           <div
-            className="cover review-cover"
-            style={{ backgroundColor: book.color }}
+            className={`cover ${coverStyle(book.title)} review-cover`}
           >
             {book.title}
           </div>

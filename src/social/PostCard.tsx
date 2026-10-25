@@ -1,3 +1,4 @@
+import { coverStyle } from '../books/coverStyle'
 import { useState } from 'react'
 import ReviewBody from '../books/ReviewBody'
 import Stars from '../books/Stars'
@@ -28,7 +29,7 @@ function PostCard({ post }: PostCardProps) {
       </header>
 
       <div className="post-book">
-        <div className="cover review-cover" style={{ backgroundColor: book.color }}>
+        <div className={`cover ${coverStyle(book.title)} review-cover`}>
           {book.title}
         </div>
         <div>

@@ -1,3 +1,4 @@
+import { coverStyle } from './coverStyle'
 import Sheet from '../layout/Sheet'
 import type { KnownBook } from './knownBooks'
 import { shelfLabels } from './useShelves'
@@ -27,12 +28,42 @@ function AddBookSheet({
   return (
     <Sheet title="Add to your shelf" onClose={onClose}>
       <div className="add-book">
-        <span className="search-cover" style={{ background: book.color }} />
+        <span className={`search-cover ${coverStyle(book.title)}`} />
         <div>
           <strong>{book.title}</strong>
           <span className="muted">{book.author}</span>
         </div>
       </div>
+
+      {book.tags.length > 0 && (
+        <ul className="add-tags" aria-label="Tags">
+          {book.tags.map((tag) => (
+            <li key={tag} className="chip">
+              {tag}
+            </li>
+          ))}
+        </ul>
+      )}
+
+      <section className="add-opinions" aria-label="What readers say">
+        <h3>What readers say</h3>
+        {book.opinions.length === 0 ? (
+          <p className="muted">
+            No reader notes yet. Mark it as read and tell others what you
+            thought.
+          </p>
+        ) : (
+          book.opinions.slice(0, 3).map((opinion) => (
+            <blockquote key={opinion.text}>
+              <p>{opinion.text}</p>
+              <footer>
+                {opinion.by}
+                {opinion.rating !== undefined && ` · ${opinion.rating} of 5`}
+              </footer>
+            </blockquote>
+          ))
+        )}
+      </section>
 
       {current && (
         <p className="muted">

@@ -1,3 +1,4 @@
+import { coverStyle } from './coverStyle'
 import { useState } from 'react'
 import BookDetailSheet from './BookDetailSheet'
 import FavoritePicker from './FavoritePicker'
@@ -63,8 +64,7 @@ function FavoritesShelf({ books, candidates }: FavoritesShelfProps) {
             onClick={() => setSelected(book)}
           >
             <span
-              className="cover fav-cover"
-              style={{ backgroundColor: book.color }}
+              className={`cover ${coverStyle(book.title)} fav-cover`}
             >
               {book.title}
             </span>

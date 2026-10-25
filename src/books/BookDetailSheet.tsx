@@ -1,3 +1,4 @@
+import { coverStyle } from './coverStyle'
 import Sheet from '../layout/Sheet'
 import ReviewBody from './ReviewBody'
 import Stars from './Stars'
@@ -20,8 +21,7 @@ function BookDetailSheet({
     <Sheet title={book.title} onClose={onClose}>
       <div className="review">
         <div
-          className="cover review-cover"
-          style={{ backgroundColor: book.color }}
+          className={`cover ${coverStyle(book.title)} review-cover`}
         >
           {book.title}
         </div>

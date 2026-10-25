@@ -6,8 +6,8 @@ export const defaultProfile: Profile = {
   name: 'Ivana',
   handle: 'ivana',
   bio: 'Fantasy, classics and anything with a good ending.',
-  avatarId: 'green',
-  bannerId: 'meadow',
+  avatarId: 'gold',
+  bannerId: 'parchment',
   genres: [
     'Fantasy',
     'Historical fiction',

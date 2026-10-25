@@ -15,7 +15,7 @@ const authors = [...new Set(known.map((book) => book.author))]
 
 const MAX_LIKED = 500
 const ratingValues = [0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5]
-const colors = ['tomato', 'steelblue', 'seagreen', 'darkorchid', 'goldenrod', 'slategray']
+const colors = ['#7a2e2e', '#2f4a63', '#35553f', '#4a3a5c', '#8a6a2a', '#4d5560']
 
 type ReviewSheetProps = {
   book?: { title: string; author: string; color: string }
