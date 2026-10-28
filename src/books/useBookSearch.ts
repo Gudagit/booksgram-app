@@ -7,7 +7,7 @@ import { searchOpenLibrary, sameBookKey } from './openLibrarySearch'
 // domain). We only read the title and the author name; no descriptions, no covers.
 const API = 'https://www.wikidata.org/w/api.php'
 const MIN_LETTERS = 2
-const WAIT_MS = 400
+const WAIT_MS = 250
 const OPEN_LIBRARY_WAIT_MS = 1000
 const MAX_WRITERS = 3
 
@@ -190,8 +190,18 @@ export function useBookSearch(query: string) {
   const wikidata = wikidataSource.current
   const openLibrary = openLibrarySource.current
 
+  // while a new answer is on its way, the last Wikidata list stays on screen,
+  // but only the books that still match what is typed now
+  const lowered = text.toLowerCase()
+  const stale =
+    active && wikidata === null
+      ? (wikidataSource.latest?.results ?? []).filter((book) =>
+          `${book.title} ${book.author}`.toLowerCase().includes(lowered),
+        )
+      : []
+
   // Wikidata first, then Open Library books we do not have yet
-  const results = mergeBooks(wikidata?.results ?? [], openLibrary?.results ?? [])
+  const results = mergeBooks(wikidata?.results ?? stale, openLibrary?.results ?? [])
   // every book we have seen lately, for the grey "keep typing" suggestion
   const pool = mergeBooks(
     wikidataSource.latest?.results ?? [],
@@ -201,7 +211,7 @@ export function useBookSearch(query: string) {
   return {
     pool,
     tooShort: text !== '' && !active,
-    loading: active && wikidata === null && openLibrary === null,
+    loading: active && wikidata === null && openLibrary === null && stale.length === 0,
     loadingMore: active && openLibrary === null,
     failed: wikidata?.failed === true && openLibrary?.failed === true,
     results,
