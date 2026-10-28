@@ -1872,6 +1872,8 @@ button:focus-visible {
   box-shadow: 0 8px 18px -12px rgba(60, 48, 20, 0.5);
   color: var(--ink);
   text-decoration: none;
+  cursor: pointer;
+  padding: 0;
 }
 
 .corner-button svg {

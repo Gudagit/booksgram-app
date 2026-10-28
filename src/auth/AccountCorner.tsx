@@ -1,15 +1,17 @@
 import { Link } from 'react-router'
 import { useAuth } from './useAuth'
+import ThemeToggle from '../layout/ThemeToggle'
 
 function AccountCorner() {
   const { user, loading, configured } = useAuth()
 
-  // before accounts are set up (or while we check) there is nothing to show
-  if (!configured || loading) return null
+  // before accounts are set up (or while we check) only the theme button shows
+  const showAccount = configured && !loading
 
   return (
     <div className="account-corner">
-      {user ? (
+      <ThemeToggle />
+      {!showAccount ? null : user ? (
         <Link
           to="/login"
           className="corner-button corner-initial"
